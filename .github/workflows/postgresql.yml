@@ -32,7 +32,9 @@ jobs:
 
       # Performs a clean installation of all dependencies in the `package.json` file
       - name: Install dependencies
-        run: npm ci
+        run: pwd
+          mvn clean install
+    
 
       - name: Connect to PostgreSQL
         # Runs a script that creates a PostgreSQL table, populates
