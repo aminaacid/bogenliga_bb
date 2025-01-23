@@ -1,0 +1,37 @@
+name: Run Client Script
+
+on:
+  push:
+    branches:
+      - main  
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-client:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Шаг 1: Клонирование репозитория
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Шаг 2: Установка Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # Убедитесь, что версия совместима с вашим проектом
+
+      # Шаг 3: Установка зависимостей (если есть package.json)
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then
+            npm install
+          else
+            echo "No package.json found, skipping dependency installation."
+          fi
+
+      # Шаг 4: Запуск client.js
+      - name: Run client.js
+        run: node path/to/client.js  # Укажите путь к вашему скрипту client.js
