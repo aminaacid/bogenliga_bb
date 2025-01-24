@@ -53,7 +53,7 @@ jobs:
         run: |
           java -version
           export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED"
-          mvn clean -T 1C
+          mvn clean install -T 1C
 
       # 6. Запуск тестов бэкенда
       - name: Run backend tests
