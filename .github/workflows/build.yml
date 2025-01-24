@@ -21,14 +21,14 @@ jobs:
           --health-retries=5
     strategy:
       matrix:
-        browser: [chrome]  # Тесты запускаются только в Chrome
+        browser: [chrome]  
 
     steps:
       # 1
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-           fetch-depth: 0   # Отключаем мелкое клонирование для лучшей актуальности анализа
+           fetch-depth: 0   
      
       # 2
       - name: Set up JDK 17
@@ -63,40 +63,38 @@ jobs:
       - name: Clone frontend repository
         uses: actions/checkout@v2
         with:
-          repository: aminaacid/bogenliga_bbf  # Укажите URL вашего репозитория с фронтендом
-          token: ${{ secrets.GITHUB_TOKEN }}   # Используйте токен для доступа (если требуется)
+          repository: aminaacid/bogenliga_bbf  
+          token: ${{ secrets.GITHUB_TOKEN }}   
 
       # 7
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Установите нужную версию Node.js
+          node-version: '16'  
 
       # 8
       - name: Install frontend dependencies
         working-directory: ./bogenliga
         run: |
-          npm install  # Или yarn install, если вы используете yarn
+          npm install
 
       # 9
       - name: Build frontend
         working-directory: ./bogenliga
         run: |
-          npm run build  # Или yarn build, если вы используете yarn
-
+          npm run build  
       # 10
       - name: Start frontend
         working-directory: ./bogenliga
         run: |
-          npm start &  # Или yarn start, если вы используете yarn
+          npm start &  
 
       # 11
       - name: Run Cypress tests in Chrome
         run: |
           npx cypress run --browser chrome --record --parallel --key ${{ secrets.CYPRESS_RECORD_KEY }} --config-file ./bogenliga_bbf/bogenliga/cypress.config.ts
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  # Добавьте ваш ключ в GitHub Secrets
-
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  
       # 12
       - name: Build completion
         if: success()
