@@ -23,7 +23,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-           fetch-depth: 0   # Shallow clones should be disabled for a better relevancy of analysis
+           fetch-depth: 0   # Отключаем мелкое клонирование для лучшей актуальности анализа
      
       # 2
       - name: Set up JDK 17
@@ -42,19 +42,23 @@ jobs:
           
       # 4
       - name: Build project
-        working-directory: ./bogenliga
+        working-directory: ./bogenliga  # Предположим, что основной код находится здесь
         run: |
           java -version
           export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED"
           mvn clean -T 1C
           
       # 5
+      - name: List directory contents (для отладки)
+        run: ls -al ./bogenliga_bb   # Проверим, существует ли директория backend
+
+      # 6
       - name: Start backend
-        working-directory: ./bogenliga_bb
+        working-directory: ./bogenliga_bb  # Убедись, что путь правильный для бэкенда
         run: |
           mvn spring-boot:run &
           
-      # 6
+      # 7
       - name: Build completion
         if: success()
         run: echo "Build and tests completed successfully!"
