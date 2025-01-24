@@ -54,7 +54,7 @@ jobs:
       - name: Run backend tests
         working-directory: ./bogenliga
         run: |
-          mvn test  # Запуск тестов для backend
+          mvn test  
 
       # 6
       - name: Start backend
