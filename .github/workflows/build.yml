@@ -58,7 +58,7 @@ jobs:
 
       # 6
       - name: Start backend
-        working-directory: ./bogenliga
+        working-directory: ./bogenliga/bogenliga-application
         run: |
           mvn spring-boot:run &
 
