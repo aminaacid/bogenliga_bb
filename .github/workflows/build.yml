@@ -1,4 +1,3 @@
-
 name: Build
 on: [push, pull_request]
 jobs:
@@ -24,7 +23,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-           fetch-depth: 0   # Shallow clones should be disabled for a better relevancy of analysis
+           fetch-depth: 0   # Отключаем мелкое клонирование для лучшей актуальности анализа
      
       # 2
       - name: Set up JDK 17
@@ -42,13 +41,13 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
           
       # 4
-      - name: Build project
+      - name: Build backend project
         working-directory: ./bogenliga
         run: |
           java -version
           export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED"
           mvn clean -T 1C
-          
+
       # 5
       - name: Start backend
         working-directory: ./bogenliga
@@ -56,6 +55,37 @@ jobs:
           mvn spring-boot:run &
 
       # 6
+      - name: Clone frontend repository
+        uses: actions/checkout@v2
+        with:
+          repository: aminaacid/bogenliga_bbf  # Укажите URL вашего репозитория с фронтендом
+          token: ${{ secrets.GITHUB_TOKEN }}   # Используйте токен для доступа (если требуется)
+
+      # 7
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Установите нужную версию Node.js
+
+      # 8
+      - name: Install frontend dependencies
+        working-directory: ./bogenliga
+        run: |
+          npm install  # Или yarn install, если вы используете yarn
+
+      # 9
+      - name: Build frontend
+        working-directory: ./bogenliga
+        run: |
+          npm run build  # Или yarn build, если вы используете yarn
+
+      # 10
+      - name: Start frontend
+        working-directory: ./bogenliga
+        run: |
+          npm start &  # Или yarn start, если вы используете yarn
+
+      # 11
       - name: Build completion
         if: success()
         run: echo "Build and tests completed successfully!"
