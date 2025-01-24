@@ -42,27 +42,23 @@ jobs:
           
       # 4
       - name: Build project
-        working-directory: ./bogenliga_bb  # Это папка, где находится build.yml
+        working-directory: ./bogenliga
         run: |
           java -version
           export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED"
           mvn clean -T 1C
           
       # 5
-      - name: List root directory contents
-        run: ls -al   # Проверим содержимое корня репозитория
+      - name: List directory contents (для отладки)
+        run: ls -al ./bogenliga_bb  # Проверим, существует ли директория bogenliga_bb
 
       # 6
-      - name: List directory contents in bogenliga_bb
-        run: ls -al ./bogenliga_bb  # Проверим содержимое папки bogenliga_bb
-
-      # 7
       - name: Start backend
-        working-directory: ./bogenliga_bb/backend  # Убедись, что путь правильный для бэкенда
+        working-directory: ./bogenliga_bb  # Запускаем бэкенд из правильной директории
         run: |
           mvn spring-boot:run &
           
-      # 8
+      # 7
       - name: Build completion
         if: success()
         run: echo "Build and tests completed successfully!"
