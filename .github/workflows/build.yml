@@ -51,43 +51,56 @@ jobs:
           mvn clean -T 1C
 
       # 5
+      - name: Run backend tests
+        working-directory: ./bogenliga
+        run: |
+          mvn test  # Запуск тестов для backend
+
+      # 6
       - name: Start backend
         working-directory: ./bogenliga
         run: |
           mvn spring-boot:run &
 
-      # 6
+      # 7
       - name: Clone frontend repository
         uses: actions/checkout@v2
         with:
           repository: aminaacid/bogenliga_bbf  
           token: ${{ secrets.GITHUB_TOKEN }}   
 
-      # 7
+      # 8
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'  
 
-      # 8
+      # 9
       - name: Install frontend dependencies
         working-directory: ./bogenliga
         run: |
           npm install
 
-      # 9
+      # 10
       - name: Build frontend
         working-directory: ./bogenliga
         run: |
           npm run build  
-      # 10
+      
+      # 11
+      - name: Run Cypress tests
+        working-directory: ./bogenliga
+        run: |
+          npm install cypress # Установка Cypress
+          npx cypress run --headless --browser chrome  # Запуск Cypress тестов
+
+      # 12
       - name: Start frontend
         working-directory: ./bogenliga
         run: |
           npm start &  
 
-      
-      # 12
+      # 13
       - name: Build completion
         if: success()
         run: echo "Build and tests completed successfully!"
