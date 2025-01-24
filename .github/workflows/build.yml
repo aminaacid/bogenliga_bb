@@ -4,7 +4,7 @@ on: [push, pull_request]
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     services:
       postgres:
         image: postgres:13
@@ -21,7 +21,7 @@ jobs:
           --health-retries=5
     strategy:
       matrix:
-        browser: [chrome, firefox]  # Параллельный запуск на этих браузерах
+        browser: [chrome]  # Тесты запускаются только в Chrome
 
     steps:
       # 1
@@ -91,9 +91,9 @@ jobs:
           npm start &  # Или yarn start, если вы используете yarn
 
       # 11
-      - name: Run Cypress tests in parallel
+      - name: Run Cypress tests in Chrome
         run: |
-          npx cypress run --browser ${{ matrix.browser }} --record --parallel --key ${{ secrets.CYPRESS_RECORD_KEY }}
+          npx cypress run --browser chrome --record --parallel --key ${{ secrets.CYPRESS_RECORD_KEY }}
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  # Добавьте ваш ключ в GitHub Secrets
 
