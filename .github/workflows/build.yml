@@ -49,16 +49,12 @@ jobs:
           mvn clean -T 1C
           
       # 5
-      - name: List directory contents
-        run: ls -al ./bogenliga/bogenliga_bb/backend
-
-      # 6
       - name: Start backend
-        working-directory: ./bogenliga/bogenliga_bb/backend
+        working-directory: ./bogenliga_bb
         run: |
           mvn spring-boot:run &
-
-      # 7
+          
+      # 6
       - name: Build completion
         if: success()
         run: echo "Build and tests completed successfully!"
