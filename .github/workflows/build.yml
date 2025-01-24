@@ -1,3 +1,4 @@
+
 name: Build
 on: [push, pull_request]
 jobs:
@@ -23,7 +24,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-           fetch-depth: 0   # Отключаем мелкое клонирование для лучшей актуальности анализа
+           fetch-depth: 0   # Shallow clones should be disabled for a better relevancy of analysis
      
       # 2
       - name: Set up JDK 17
@@ -49,16 +50,12 @@ jobs:
           mvn clean -T 1C
           
       # 5
-      - name: List directory contents (для отладки)
-        run: ls -al ./bogenliga_bb  # Проверим, существует ли директория bogenliga_bb
-
-      # 6
       - name: Start backend
-        working-directory: ./bogenliga_bb  # Запускаем бэкенд из правильной директории
+        working-directory: ./bogenliga
         run: |
           mvn spring-boot:run &
-          
-      # 7
+
+      # 6
       - name: Build completion
         if: success()
         run: echo "Build and tests completed successfully!"
