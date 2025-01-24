@@ -4,6 +4,20 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: swt2
+          POSTGRES_DB: swt2
+          POSTGRES_PASSWORD: swt2
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U swt2 -d swt2"
+          --health-timeout=30s
+          --health-interval=10s
+          --health-retries=3
     steps:
     # 1 
       - name: Checkout repository
