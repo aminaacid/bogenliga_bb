@@ -70,7 +70,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Установите нужную версию Node.js
+          node-version: '18'  # Установите нужную версию Node.js
 
       # 8
       - name: Install frontend dependencies
