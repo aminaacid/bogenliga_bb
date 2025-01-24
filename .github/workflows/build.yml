@@ -1,5 +1,6 @@
 name: Build
 on: [push, pull_request]
+
 jobs:
   build:
     name: Build
@@ -86,6 +87,16 @@ jobs:
           npm start &  # Или yarn start, если вы используете yarn
 
       # 11
+      - name: Run Cypress tests in parallel
+        run: |
+          npx cypress run --browser ${{ matrix.browser }} --record --parallel --key ${{ secrets.CYPRESS_RECORD_KEY }}
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  # Добавьте ваш ключ в GitHub Secrets
+        strategy:
+          matrix:
+            browser: [chrome, firefox]  # Запускать тесты на Chrome и Firefox
+
+      # 12
       - name: Build completion
         if: success()
         run: echo "Build and tests completed successfully!"
