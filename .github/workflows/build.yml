@@ -76,6 +76,7 @@ jobs:
       - name: Install frontend dependencies
         working-directory: ./bogenliga
         run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
           npm install  # Или yarn install, если вы используете yarn
 
       # 9
@@ -93,7 +94,7 @@ jobs:
       # 11
       - name: Run Cypress tests in Chrome
         run: |
-          npx cypress run --browser chrome --record --parallel --key ${{ secrets.CYPRESS_RECORD_KEY }}
+          npx cypress run --browser chrome --record --parallel --key ${{ secrets.CYPRESS_RECORD_KEY }} --config-file ./bogenliga_bbf/bogenliga/cypress.config.ts
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  # Добавьте ваш ключ в GitHub Secrets
 
