@@ -50,7 +50,7 @@ jobs:
           
       # 5
       - name: Start backend
-        working-directory: ./backend
+        working-directory: ./bogenliga/bogenliga_bb/backend
         run: |
           mvn spring-boot:run &
 
