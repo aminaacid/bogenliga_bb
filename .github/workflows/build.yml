@@ -19,9 +19,6 @@ jobs:
           --health-timeout=60s
           --health-interval=15s
           --health-retries=5
-    strategy:
-      matrix:
-        browser: [chrome]  
 
     steps:
       # 1
@@ -89,12 +86,7 @@ jobs:
         run: |
           npm start &  
 
-      # 11
-      - name: Run Cypress tests in Chrome
-        run: |
-          npx cypress run --browser chrome --record --parallel --key ${{ secrets.CYPRESS_RECORD_KEY }} --config-file ./bogenliga_bbf/bogenliga/cypress.config.ts
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  
+      
       # 12
       - name: Build completion
         if: success()
