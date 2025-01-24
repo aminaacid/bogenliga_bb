@@ -28,7 +28,7 @@ jobs:
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       # Performs a clean installation of all dependencies in the `package.json` file
       - name: Install dependencies
