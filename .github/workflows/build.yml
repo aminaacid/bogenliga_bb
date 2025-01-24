@@ -7,7 +7,7 @@ jobs:
     steps:
     # 1 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
            fetch-depth: 0   # Shallow clones should be disabled for a better relevancy of analysis
      # 2
