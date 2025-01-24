@@ -52,7 +52,7 @@ jobs:
         working-directory: ./bogenliga
         run: |
           java -version
-          export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED"
+          export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED"
           mvn clean install -T 1C
 
       # 6. Запуск тестов бэкенда
