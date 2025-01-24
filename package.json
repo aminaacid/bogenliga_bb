@@ -1,0 +1,20 @@
+{
+  "name": "bogenliga_bb",
+  "version": "1.0.0",
+  "description": "[![Build](https://github.com/bettercodepaul/swt2-bsa-backend/actions/workflows/build.yml/badge.svg)](https://github.com/bettercodepaul/swt2-bsa-backend/actions/workflows/build.yml) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bettercodepaul_swt2-bsa-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=bettercodepaul_swt2-bsa-backend) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bettercodepaul_swt2-bsa-backend&metric=coverage)](https://sonarcloud.io/dashboard?id=bettercodepaul_swt2-bsa-backend) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=bettercodepaul_swt2-bsa-backend&metric=code_smells)](https://sonarcloud.io/dashboard?id=bettercodepaul_swt2-bsa-backend)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aminaacid/bogenliga_bb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aminaacid/bogenliga_bb/issues"
+  },
+  "homepage": "https://github.com/aminaacid/bogenliga_bb#readme"
+}
